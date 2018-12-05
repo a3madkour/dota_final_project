@@ -5,7 +5,7 @@ from od_python.rest import ApiException
 from pprint import pprint
 import json
 import os 
-def getMatchesByPlayer(account_id,printToFile = True):
+def getMatchesByPlayer(account_id,write_to_file = True):
     # create an instance of the API class
     api_instance = od_python.PlayersApi()
     # account_id = 87278757 # int | Steam32 account ID
@@ -36,7 +36,7 @@ def getMatchesByPlayer(account_id,printToFile = True):
         for match in api_response:
             mat = match.to_dict()
             matches[mat['match_id']] = mat
-        if printToFile:
+        if write_to_file:
             with open('playerMatches/player_'+str(account_id)+'.json', 'w') as outfile:
                 json.dump(matches, outfile, indent = 4, sort_keys = False)
         return matches
@@ -44,7 +44,7 @@ def getMatchesByPlayer(account_id,printToFile = True):
     except ApiException as e:
         print("Exception when calling PlayersApi->players_account_id_matches_get: %s\n" % e)
 
-def getMatchesByID(match_id,account_id = None,printToFile = True):
+def getMatchesByID(match_id,account_id = None,write_to_file = True):
 
     # create an instance of the API class
     api_instance = od_python.MatchesApi()
@@ -54,7 +54,7 @@ def getMatchesByID(match_id,account_id = None,printToFile = True):
         # GET /matches/{match_id}
         api_response = api_instance.matches_match_id_get(match_id)
         match = api_response.to_dict()
-        if printToFile:
+        if write_to_file:
             if account_id:
                 if not os.path.exists('matches/'+str(account_id)+'/'):
                     os.makedirs('matches/'+str(account_id)+'/')
