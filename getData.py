@@ -69,12 +69,12 @@ def loadMatches(filename):
         d = json.load(json_data)
     return d
 if __name__ == '__main__':
-    matches = loadMatches('playerMatches/87278757.json')
+    matches = loadMatches('playerMatches/player_82262664.json')
     matchs_ids = matches.keys()
     for i,match_id in enumerate(matchs_ids):
         if i!=0 and (i%60 == 0):
             print('curent game: ',i)
             time.sleep(60)
-        getMatchesByID(match_id,87278757)
-    # getMatchesByPlayer(87278757)
+        getMatchesByID(match_id,82262664)
+    # getMatchesByPlayer(82262664)
     

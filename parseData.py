@@ -70,9 +70,10 @@ def parseDataOfPlayer(account_id,write_to_file = True):
         X.append(x)
 
     if write_to_file:  
-        filename = str(account_id) + '_all.csv'
+        filename = str(account_id) + '_all_X.csv'
+        filename_y = str(account_id) + '_all_Y.csv'
         f = open(filename,'w')
-        line = 'match_id,version,start_time'
+        line = 'match_id,version,start_time,'
         for i in range(4):
             line += 'ally_hero'+str(i+1)+','
 
@@ -89,6 +90,14 @@ def parseDataOfPlayer(account_id,write_to_file = True):
                 line += str(el)+','
             line += '\n'
             f.write(line)
+        f.close()
+
+        f = open(filename_y,'w')
+        f.write('hero_picked\n')
+        for y in Y:
+            line = str(y) + '\n'
+            f.write(line)
+
         f.close()
     
 
