@@ -6,11 +6,12 @@ def readHeroes():
         heroes = json.load(input_file)    
     return heroes
 
-def parseDataOfPlayer(account_id,write_to_file = True):
+def parseDataOfPlayer(account_id,game_mode = None,write_to_file = True):
     heroes = readHeroes()    
-    my_path = 'matches/'+str(account_id)+'/'
+    my_path = 'matches/'+str(account_id)+'_'+str(game_mode)+'/'
     Y = []
     X = []
+    bans_exist = False
     if not os.path.exists(my_path):
         print('No data availabe under the matches dir for this player')
     if not os.path.isdir(my_path):
@@ -19,6 +20,7 @@ def parseDataOfPlayer(account_id,write_to_file = True):
     if len(games_files) <= 0:
         print('No data availabe under the matches dir for this player')
     for game_file in games_files:
+        skip_bans = False
         with open(game_file) as input_file:
             game = json.load(input_file)    
         # print(game.keys())
@@ -32,10 +34,12 @@ def parseDataOfPlayer(account_id,write_to_file = True):
 
         banned_heroes = []  
         if picks_bans is None:
-            continue
-        for pick_ban in picks_bans:
-            if not pick_ban['is_pick']:
-                banned_heroes.append(pick_ban['hero_id'])
+            skip_bans = True
+        else:
+            bans_exist = True
+            for pick_ban in picks_bans:
+                if not pick_ban['is_pick']:
+                    banned_heroes.append(pick_ban['hero_id'])
         #getting the hero picks by teams and the player we are looking at 
         radiant = []
         dire = []
@@ -69,13 +73,14 @@ def parseDataOfPlayer(account_id,write_to_file = True):
         ally_team.sort()
         enemy_team.sort()
         banned_heroes.sort()
-
-        x = [match_id,version,start_time] + ally_team + enemy_team + banned_heroes  
+        x = [match_id,version,start_time] + ally_team + enemy_team  
+        if not skip_bans:
+            x +=  banned_heroes 
         X.append(x)
 
     if write_to_file:  
-        filename = str(account_id) + '_all_X.csv'
-        filename_y = str(account_id) + '_all_Y.csv'
+        filename = str(account_id) + '_'+str(game_mode)+'_all_X.csv'
+        filename_y = str(account_id) + '_'+str(game_mode)+'_all_Y.csv'
         f = open(filename,'w')
         line = 'match_id,version,start_time,'
         for i in range(4):
@@ -84,8 +89,10 @@ def parseDataOfPlayer(account_id,write_to_file = True):
         for i in range(5):
             line += 'enemy_team'+str(i+1)+','
 
-        for i in range(12):
-            line += 'banned_hero'+str(i+1)+','
+        if bans_exist :
+            for i in range(12):
+                line += 'banned_hero'+str(i+1)+','
+        line = line[:-1]
         line += '\n'
         f.write(line)
         for x in X:
@@ -106,5 +113,6 @@ def parseDataOfPlayer(account_id,write_to_file = True):
     
 
 if __name__ == '__main__':
-    account_id = 87278757
-    parseDataOfPlayer(account_id)
+    account_id = 224051329
+    game_mode = 22
+    parseDataOfPlayer(account_id,game_mode)

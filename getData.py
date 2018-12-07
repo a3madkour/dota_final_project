@@ -38,7 +38,7 @@ def getMatchesByPlayer(account_id,game_mode = None,lobby_type = None,write_to_fi
             mat = match.to_dict()
             matches[mat['match_id']] = mat
         if write_to_file:
-            with open('playerMatches/player_'+str(account_id)+'.json', 'w') as outfile:
+            with open('playerMatches/player_'+str(account_id)+'_'+str(game_mode)+'.json', 'w') as outfile:
                 json.dump(matches, outfile, indent = 4, sort_keys = False)
         return matches
 
@@ -57,9 +57,9 @@ def getMatchesByID(match_id,account_id = None,write_to_file = True):
         match = api_response.to_dict()
         if write_to_file:
             if account_id:
-                if not os.path.exists('matches/'+str(account_id)+'/'):
-                    os.makedirs('matches/'+str(account_id)+'/')
-                with open('matches/'+str(account_id)+'/'+str(match_id)+'.json', 'w') as outfile:
+                if not os.path.exists('matches/'+str(account_id)+'_'+str(game_mode)+'/'):
+                    os.makedirs('matches/'+str(account_id)+'_'+str(game_mode)+'/')
+                with open('matches/'+str(account_id)+'_'+str(game_mode)+'/'+str(match_id)+'.json', 'w') as outfile:
                     json.dump(match, outfile, indent = 4, sort_keys = False)
         return match
     except ApiException as e:
@@ -70,14 +70,14 @@ def loadMatches(filename):
         d = json.load(json_data)
     return d
 if __name__ == '__main__':
-    account_id = 224051329
-    matches = loadMatches('playerMatches/player_'+str(account_id)+'.json')
-    matchs_ids = matches.keys()
-    for i,match_id in enumerate(matchs_ids):
-        if i!=0 and (i%60 == 0):
-            print('curent game: ',i)
-            time.sleep(120)
-        getMatchesByID(match_id,account_id)
-    # game_mode = 1
-    # getMatchesByPlayer(account_id,game_mode)
+    account_id = 116287390
+    game_mode = 1
+    # matches = loadMatches('playerMatches/player_'+str(account_id)+'_'+str(game_mode)+'.json')
+    # matchs_ids = matches.keys()
+    # for i,match_id in enumerate(matchs_ids):
+    #     if i!=0 and (i%60 == 0):
+    #         print('curent game: ',i)
+    #         time.sleep(120)
+    #     getMatchesByID(match_id,account_id)
+    getMatchesByPlayer(account_id,game_mode)
     
