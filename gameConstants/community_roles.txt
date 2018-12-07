@@ -1,116 +1,116 @@
 Abaddon - Offlane
-Alchemist - Mid or Safelane Carry
-Ancient Apparition - Support or memey Mid
+Alchemist - Mid , Safelane Carry
+Ancient Apparition - Support ,  Mid
 Anti-Mage - Safelane Carry
-Arc Warden - Mid or Safelane Carry
+Arc Warden - Mid , Safelane Carry
 Axe - Offlane
 Bane - Support
 Batrider - Offlane
 Beastmaster - Offlane
-Bloodseeker - Mid or Safelane Carry
+Bloodseeker - Mid , Safelane Carry
 Bounty Hunter - Roaming Support
 Brewmaster - Offlane
-Bristleback - Any core role, but usually Offlane in pubs
-Broodmother - Offlane normally, occasionally mid
+Bristleback - Offlane 
+Broodmother - Offlane, Mid
 Centaur Warrunner - Offlane
 Chaos Knight - Safelane Carry
 Chen - Support
 Clinkz - Safelane Carry
-Clockwerk - Support or Offlane
+Clockwerk - Support , Offlane
 Crystal Maiden - Support
 Dark Willow - Mid or Support
 Dark Seer - Offlane
 Dazzle - Support
 Death Prophet - Mid
 Disruptor - Support
-Doom - hard to pin down, usually Support or Offlane I think
+Doom - Support , Offlane 
 Dragon Knight - Mid
 Drow Ranger - Safelane Carry
 Earth Spirit - Roaming Support
-Earthshaker - Offlane or Support
-Elder Titan- Support or occasionally Offlane
-Ember Spirit - Mid or occasionally Safelane Carry
-Enchantress - Support or Offlane
+Earthshaker - Offlane , Support
+Elder Titan- Support , Offlane
+Ember Spirit - Mid , Safelane Carry
+Enchantress - Support , Offlane
 Enigma - Offlane
-Faceless Void - Safelane Carry or Mid
+Faceless Void - Safelane Carry , Mid
 Grimstroke - Support
 Gyrocopter - Safelane Carry
 Huskar - Safelane Carry
 Invoker - Mid
 IO - Support
 Jakiro - Support
-Juggernaut - Safelane Carry or occasionally Mid
+Juggernaut - Safelane Carry , Mid
 Keeper of the Light - Support
-Kunkka - Roaming Support or Mid
+Kunkka - Roaming Support , Mid
 Legion Commander - Offlane
-Leshrac - Support or Mid
+Leshrac - Support , Mid
 Lich - Support
 Lifestealer - Safelane Carry
 Lina - Mid
 Lion - Support
-Lone Druid - Safelane Carry or Mid
+Lone Druid - Safelane Carry , Mid
 Luna - Safelane Carry
 Lycan - Safelane Carry
-Magnus - Offlane or occasionally Mid
+Magnus - Offlane , occasionally Mid
 Medusa - Safelane Carry or Mid
-Meepo - Mid or Safelane Carry
-Mirana - Mid or Roaming Support
-Monkey King - rarely played due to nerfs, was Roaming Support
+Meepo - Mid , Safelane Carry
+Mirana - Mid , Roaming Support
+Monkey King - Roaming Support
 Morphling - Safelane Carry
 Naga Siren - Safelane Carry
-Nature's Prophet - Offlane, but occasionally either of the other Core roles
-Necrophos - Mid or Safelane Carry
-Night Stalker - Roaming Support or Offlane
-Nyx Assassin - Offlane or Support
+Nature's Prophet - Offlane
+Necrophos - Mid , Safelane Carry
+Night Stalker - Roaming Support , Offlane
+Nyx Assassin - Offlane , Support
 Ogre Magi - Support
-Omniknight -Offlane or Support
+Omniknight - Offlane , Support
 Oracle - Support
 Outworld Devourer - Mid
 Pangolier - Offlane
-Phantom Assassin - Safelane Carry or occasionally Mid
-Phantom Lancer - Safelane Carry or occasionally Mid
+Phantom Assassin - Safelane Carry , occasionally Mid
+Phantom Lancer - Safelane Carry , occasionally Mid
 Phoenix - Support
-Puck - Mid or Offlane
+Puck - Mid , Offlane
 Pudge - Roaming Support
-Pugna - Mid or Safelane Carry
+Pugna - Mid , Safelane Carry
 Queen of Pain - Mid
-Razor - Mid or Safelane Carry
+Razor - Mid , Safelane Carry
 Riki - Roaming Support
 Rubick - Support
-Sand King - Support or Offlane
+Sand King - Support , Offlane
 Shadow Demon - Support
 Shadow Fiend- Mid
 Shadow Shaman - Support
-Silencer- Support or Mid
-Skywrath Mage - Support or Mid
-Slardar - Support or Offlane
+Silencer- Support , Mid
+Skywrath Mage - Support , Mid
+Slardar - Support , Offlane
 Slark - Safelane Carry
-Sniper - Mid or Safelane Carry
+Sniper - Mid , Safelane Carry
 Spectre - Safelane Carry
-Spirit Breaker - Offlane or Roaming Support
+Spirit Breaker - Offlane , Roaming Support
 Storm Spirit - Mid
 Sven - Safelane Carry
-Techies - Offlane or Support I guess?
+Techies - Offlane , Support 
 Templar Assassin - Mid
-Terrorblade - Safelane Carry or occasionally Mid
+Terrorblade - Safelane Carry , Mid
 Tidehunter - Offlane
-Timbersaw - Any Core role, flourishes in Safelane Carry or Mid (imo)
+Timbersaw - Safelane Carry , Mid 
 Tinker - Mid
-Tiny - Mid or Safelane Carry
+Tiny - Mid , Safelane Carry
 Treant Protector - Support
 Troll Warlord - Safelane Carry
 Tusk - Roaming Support
 Underlord - Offlane
-Undying - Offlane or Support
-Ursa- Safelane Carry or Mid
-Vengeful Spirit - Safelane Carry or Support
-Venomancer - Safelane Carry or Mid
-Viper - Mid or Safelane Carry
-Visage - Support or Mid
+Undying - Offlane , Support
+Ursa- Safelane Carry , Mid
+Vengeful Spirit - Safelane Carry , Support
+Venomancer - Safelane Carry , Mid
+Viper - Mid , Safelane Carry
+Visage - Support , Mid
 Warlock - Support
-Weaver - Safelane Carry or Support
-Windranger - Mid or Support
+Weaver - Safelane Carry , Support
+Windranger - Mid , Support
 Winter Wyvern - Support
 Witch Doctor - Support
 Wraith King - Safelane Carry
-Zeus - Mid (also a greedy 4 recently has been experimented with by pros)
+Zeus - Mid 

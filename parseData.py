@@ -112,7 +112,20 @@ def parseDataOfPlayer(account_id,game_mode = None,write_to_file = True):
         f.close()
     
 
+def parseRoles():
+    heroes = readHeroes()
+    f = open('gameConstants/community_roles.txt')
+    lines = f.readlines()
+    for line in lines:
+        components = line.split('-')
+        name = components[0].strip()
+        roles = components[1].replace('\n','').strip()
+        print(name)
+        print(roles)
+
+
 if __name__ == '__main__':
     account_id = 224051329
     game_mode = 22
-    parseDataOfPlayer(account_id,game_mode)
+    # parseDataOfPlayer(account_id,game_mode)
+    parseRoles()
