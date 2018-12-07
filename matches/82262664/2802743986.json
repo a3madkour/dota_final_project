@@ -592,35 +592,35 @@
             "benchmarks": {
                 "gold_per_min": {
                     "raw": 121,
-                    "pct": 0.0012746972594008922
+                    "pct": 0
                 },
                 "xp_per_min": {
                     "raw": 0,
-                    "pct": 0.0006373486297004461
+                    "pct": 0
                 },
                 "kills_per_min": {
                     "raw": 0,
-                    "pct": 0.022307202039515615
+                    "pct": 0.019758507135016465
                 },
                 "last_hits_per_min": {
                     "raw": 0,
-                    "pct": 0.0012746972594008922
+                    "pct": 0
                 },
                 "hero_damage_per_min": {
                     "raw": 0,
-                    "pct": 0.0006373486297004461
+                    "pct": 0
                 },
                 "hero_healing_per_min": {
                     "raw": 0,
-                    "pct": 0.8591459528362014
+                    "pct": 0.8616904500548848
                 },
                 "tower_damage": {
                     "raw": 0,
-                    "pct": 0.07648183556405354
+                    "pct": 0.07903402854006586
                 },
                 "stuns_per_min": {
                     "raw": 0,
-                    "pct": 0.6934353091140854
+                    "pct": 0.747530186608123
                 },
                 "lhten": {}
             }
@@ -1480,7 +1480,7 @@
             "xp_per_min": 0,
             "xp_reasons": null,
             "xp_t": null,
-            "personaname": "Douglas",
+            "personaname": "\u2744\ufe0e \u2744\ufe0e \u2744\ufe0e \u2744\ufe0e \u2744\ufe0e \u2744\ufe0e \u2744\ufe0e \u2744",
             "name": "Jerry",
             "radiant_win": false,
             "start_time": 1480097402,

@@ -66,6 +66,10 @@ def parseDataOfPlayer(account_id,write_to_file = True):
 
 
         #append the match_id,version ally_team,enemy_team,banned heroes,verison of the game
+        ally_team.sort()
+        enemy_team.sort()
+        banned_heroes.sort()
+
         x = [match_id,version,start_time] + ally_team + enemy_team + banned_heroes  
         X.append(x)
 

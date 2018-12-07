@@ -5,7 +5,7 @@ from od_python.rest import ApiException
 from pprint import pprint
 import json
 import os 
-def getMatchesByPlayer(account_id,write_to_file = True):
+def getMatchesByPlayer(account_id,game_mode = None,lobby_type = None,write_to_file = True):
     # create an instance of the API class
     api_instance = od_python.PlayersApi()
     # account_id = 87278757 # int | Steam32 account ID
@@ -13,8 +13,8 @@ def getMatchesByPlayer(account_id,write_to_file = True):
     # offset = 56 # int | Number of matches to offset start by (optional)
     # win = 56 # int | Whether the player won (optional)
     # patch = 56 # int | Patch ID (optional)
-    game_mode = 2 # int | Game Mode ID (optional)
-    lobby_type = 1 # int | Lobby type ID (optional)
+    game_mode = game_mode # int | Game Mode ID (optional)
+    # lobby_type = lobby_type # int | Lobby type ID (optional)
     # region = 56 # int | Region ID (optional)
     # date = 56 # int | Days previous (optional)
     # lane_role = 56 # int | Lane Role ID (optional)
@@ -31,7 +31,8 @@ def getMatchesByPlayer(account_id,write_to_file = True):
 
     try: 
         # GET /players/{account_id}/matches
-        api_response = api_instance.players_account_id_matches_get(account_id, game_mode=game_mode, lobby_type=lobby_type)
+        # api_response = api_instance.players_account_id_matches_get(account_id, game_mode=game_mode, lobby_type=lobby_type)
+        api_response = api_instance.players_account_id_matches_get(account_id, game_mode=game_mode)
         matches = {}
         for match in api_response:
             mat = match.to_dict()
@@ -69,12 +70,14 @@ def loadMatches(filename):
         d = json.load(json_data)
     return d
 if __name__ == '__main__':
-    matches = loadMatches('playerMatches/player_82262664.json')
+    account_id = 224051329
+    matches = loadMatches('playerMatches/player_'+str(account_id)+'.json')
     matchs_ids = matches.keys()
     for i,match_id in enumerate(matchs_ids):
         if i!=0 and (i%60 == 0):
             print('curent game: ',i)
-            time.sleep(60)
-        getMatchesByID(match_id,82262664)
-    # getMatchesByPlayer(82262664)
+            time.sleep(120)
+        getMatchesByID(match_id,account_id)
+    # game_mode = 1
+    # getMatchesByPlayer(account_id,game_mode)
     
