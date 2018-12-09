@@ -45,12 +45,14 @@ def getMatchesByPlayer(account_id,game_mode = None,lobby_type = None,write_to_fi
     except ApiException as e:
         print("Exception when calling PlayersApi->players_account_id_matches_get: %s\n" % e)
 
-def getMatchesByID(match_id,account_id = None,write_to_file = True):
+def getMatchesByID(match_id,account_id = None,game_mode= None,write_to_file = True):
 
     # create an instance of the API class
     api_instance = od_python.MatchesApi()
-    # match_id = 4247243752 # int | 
-
+    file_exists = os.path.isfile('matches/'+str(account_id)+'_'+str(game_mode)+'/'+str(match_id)+'.json')
+    if file_exists:
+        print(match_id,' already exists')
+        return True,False
     try: 
         # GET /matches/{match_id}
         api_response = api_instance.matches_match_id_get(match_id)
@@ -61,23 +63,37 @@ def getMatchesByID(match_id,account_id = None,write_to_file = True):
                     os.makedirs('matches/'+str(account_id)+'_'+str(game_mode)+'/')
                 with open('matches/'+str(account_id)+'_'+str(game_mode)+'/'+str(match_id)+'.json', 'w') as outfile:
                     json.dump(match, outfile, indent = 4, sort_keys = False)
-        return match
+        return True,True
     except ApiException as e:
         print("Exception when calling MatchesApi->matches_match_id_get: %s\n" % e)
+        return False,False
 
 def loadMatches(filename):
     with open(filename) as json_data:
         d = json.load(json_data)
     return d
+
 if __name__ == '__main__':
-    account_id = 116287390
-    game_mode = 1
-    # matches = loadMatches('playerMatches/player_'+str(account_id)+'_'+str(game_mode)+'.json')
-    # matchs_ids = matches.keys()
-    # for i,match_id in enumerate(matchs_ids):
-    #     if i!=0 and (i%60 == 0):
-    #         print('curent game: ',i)
-    #         time.sleep(120)
-    #     getMatchesByID(match_id,account_id)
-    getMatchesByPlayer(account_id,game_mode)
+    account_ids= [40813418,40813418 ,28936989,28936989 ,96527871 ,96527871,116287390,116287390]   
+    game_modes = [22,1,22,1,22,1,22,1]
+    for j,account_id in enumerate(account_ids):
+        game_mode = game_modes[j]
+        print(account_id,game_mode)
+        print('----------------')
+        matches = loadMatches('playerMatches/player_'+str(account_id)+'_'+str(game_mode)+'.json')
+        matchs_ids = matches.keys()
+        num_api_calls = 0
+        for i,match_id in enumerate(matchs_ids):
+            if num_api_calls!=0 and (i%60 == 0):
+                print('curent game: ',i)
+                time.sleep(60)
+            file_exists,api_called = getMatchesByID(match_id,account_id,game_mode)
+            if not file_exists:
+                print('game: ',match_id,' failed.')
+                print('Trying again after 30 seconds')
+                time.sleep(30)
+                i = i-1
+            if api_called:
+                num_api_calls += 1
+    # getMatchesByPlayer(account_id,game_mode)
     
