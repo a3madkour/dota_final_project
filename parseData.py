@@ -13,7 +13,7 @@ def readHeroes(community=False):
             heroes = json.load(input_file)
         return heroes
 
-def simpleRep(game):
+def simpleRep(game,account_id):
     skip_bans = False
     bans_exist = False
     # print(game.keys())
@@ -52,7 +52,6 @@ def simpleRep(game):
                 radiant.append(hero_id)
             else:
                 dire.append(hero_id)
-
     if account_team:
         ally_team = radiant
         enemy_team = dire
@@ -71,7 +70,7 @@ def simpleRep(game):
 
     return x,[y],bans_exist,max_ban
 
-def rolesRep(game):
+def rolesRep(game,account_id):
     radiant = []
     dire = []
     player_team = None
@@ -79,6 +78,7 @@ def rolesRep(game):
     community_roles = ['Offlane', 'Support', 'Roaming Support', 'Safelane Carry', 'Mid']
     valve_roles = ['Nuker', 'Support', 'Disabler', 'Pusher', 'Initiator', 'Durable', 'Carry', 'Jungler', 'Escape']
     players = game['players']
+    cap = {}
     for player in players:
         ally_community_roles = [0,0,0,0,0]
         enemy_community_roles = [0,0,0,0,0]
@@ -94,6 +94,7 @@ def rolesRep(game):
         if account_id == player_account_id:
             y = hero_id
             account_team = is_radiant
+            cap = player
         else:
             if is_radiant:
                 radiant.append(hero_id)
@@ -110,15 +111,17 @@ def rolesRep(game):
     ally_team.sort()
     enemy_team.sort()
 
-    hero_valve_roles = heroes[str(hero_id)]['roles']
-    hero_community_roles = heroes[str(hero_id)]['community_roles']
+    # print(cap['account_id'])
+    # print(cap['hero_id'])
+    # print(cap['match_id'])
+    # print('----------------')
+    hero_valve_roles = heroes[str(y)]['roles']
+    hero_community_roles = heroes[str(y)]['community_roles']
 
     for role in hero_community_roles:
         player_community_roles[(community_roles.index(role))] += 1
-        player_community_roles[(community_roles.index(role))] += 1
 
     for role in hero_valve_roles:
-        player_valve_roles[(valve_roles.index(role))] += 1
         player_valve_roles[(valve_roles.index(role))] += 1
 
     for hero in ally_team:
@@ -155,16 +158,27 @@ def parseDataByPlayer(account_id,game_mode = None,simple_rep=True,roles_rep = Fa
     if len(games_files) <= 0:
         print('No data availabe under the matches dir for this player')
 
+
     for game_file in games_files:
         with open(game_file) as input_file:
             game = json.load(input_file)
         version = game['version']
         match_id = game['match_id']
         start_time = game['start_time']
+        players = game['players']
+        skip_game = False
+        for player in players:
+            if player['hero_id'] == 0:
+                skip_game = False
+                break
+            if player['account_id'] == account_id:
+                skip_game = True
+        if not skip_game:
+            continue
         x = [match_id,version,start_time]
         y = []
         if simple_rep:
-            simple_x,simple_y,ban_e,num_ban = simpleRep(game)
+            simple_x,simple_y,ban_e,num_ban = simpleRep(game,account_id)
             if ban_e:
                 bans_exist = ban_e
             if num_ban > max_ban:
@@ -173,7 +187,7 @@ def parseDataByPlayer(account_id,game_mode = None,simple_rep=True,roles_rep = Fa
             y += simple_y
 
         if roles_rep:
-            roles_x,roles_y = rolesRep(game)
+            roles_x,roles_y = rolesRep(game,account_id)
             x+= roles_x
             y += roles_y 
 
@@ -222,6 +236,7 @@ def parseDataByPlayer(account_id,game_mode = None,simple_rep=True,roles_rep = Fa
             line = ''
             for el in x:
                 line += str(el)+','
+            line = line[:-1]
             line += '\n'
             f.write(line)
         f.close()
@@ -243,9 +258,11 @@ def parseDataByPlayer(account_id,game_mode = None,simple_rep=True,roles_rep = Fa
             line = ''
             for el in y:
                 line += str(el) +','
+            line = line[:-1]
             line +=  '\n'
             f.write(line) 
-            f.close()
+
+        f.close()
 
 def parseDataToSequences(account_id,game_mode,trunc=True,write_to_file = True):
     my_path = 'matches/'+str(account_id)+'_'+str(game_mode)+'/'
@@ -262,26 +279,37 @@ def parseDataToSequences(account_id,game_mode,trunc=True,write_to_file = True):
     for game_file in games_files:
         with open(game_file) as input_file:
             game = json.load(input_file)
+        skip_game = False
         version = game['version']
         match_id = game['match_id']
         start_time = game['start_time']
         x = [match_id,version,start_time]
         picks_bans = game['picks_bans']
         players = game['players']
+        for player in players:
+            if player['hero_id'] == 0:
+                    skip_game = False
+                    break
+            if player['account_id'] == account_id:
+                    skip_game = True
+        if not skip_game:
+            continue
         seq_raw = []
         if picks_bans is not None:
             for pick_ban in picks_bans:
                 seq_raw.append((pick_ban['is_pick'],pick_ban['hero_id'],pick_ban['team'],pick_ban['order']))
         else:
             continue
-        player_team = -1
-        player_pick = -1
+
         for player in players:
             if player['account_id'] == account_id:
                 for se in seq_raw:
                     if se[1] == player['hero_id']:
                         player_team = se[2]
                         player_pick = se[1]
+                if game_mode == 22:
+                    player_pick = player['hero_id']
+                    player_team = player['is_radiant']
 
         seq_raw.sort(key=lambda tup: tup[3])
         seq = ''
@@ -309,14 +337,16 @@ def parseDataToSequences(account_id,game_mode,trunc=True,write_to_file = True):
     if write_to_file:
         filename_x = str(account_id) + '_'+str(game_mode)
         filename_y = str(account_id) + '_'+str(game_mode)
+        print(trunc)
         if trunc:
-            filename_x+'_trunc'
-            filename_x+'_trunc'
+            filename_x+='_trunc'
+            filename_y+='_trunc'
             
         filename_x += '_seqsX.csv'
         filename_y += '_seqsY.csv'
         
         f = open(filename_x,'w')
+        print(filename_x)
         line = 'match_id,version,start_time,seqs\n'
         f.write(line)
         line = ''
@@ -351,8 +381,6 @@ def parseRoles():
         for i,role in enumerate(roles):
             roles[i] = role.strip()
         for hero in heroes:
-            for valve_roles in heroes[hero]['roles']:
-                s.add(valve_roles)
             if heroes[hero]['localized_name'] == name:
                 heroes[hero]['community_roles'] = roles
 
@@ -362,8 +390,8 @@ def parseRoles():
 
 
 if __name__ == '__main__':
-    account_id = 82262664
-    game_mode = 2
-    # parseDataByPlayer(account_id,game_mode,True,False,False)
+    account_id = 40813418
+    game_mode = 22
+    # parseDataByPlayer(account_id,game_mode,False,True,True)
     parseDataToSequences(account_id,game_mode)
     # parseRoles()
